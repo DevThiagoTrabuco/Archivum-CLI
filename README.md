@@ -21,7 +21,7 @@ cd Archivum-CLI
 
 npm install
 
-node archivum.js
+node src/index.js
 ```
 
 ## License
