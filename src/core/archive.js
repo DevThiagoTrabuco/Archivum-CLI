@@ -42,7 +42,13 @@ export async function archiveImages(
             outputName,
         );
         generatedPdfs.push(generatedPdf);
+        
+        await fs.rm(tempDir, { recursive: true, force: true }).catch((err) => {
+            console.error(`Não foi possível remover o diretório temporário.`);
+            console.error(err);
+        });
     }
+    
 
     return generatedPdfs;
 }
