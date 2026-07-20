@@ -8,6 +8,7 @@ import {
     askForOutputName,
 } from "./cli/prompt.js";
 import { archiveImages } from "./core/archive.js";
+import { createProgressBar } from "./utils/progress.js";
 
 async function main() {
     try {
@@ -15,11 +16,13 @@ async function main() {
         const watermarkPath = await askForWatermarkPath();
         const outputName = await askForOutputName();
         const outputDirectory = path.join(inputDirectory, "pdfs");
+        const progressBar = await createProgressBar(inputDirectory);
         const generatedPdfs = await archiveImages(
             inputDirectory,
             outputDirectory,
             outputName,
             watermarkPath || undefined,
+            progressBar,
         );
 
         console.log(
